@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketa</title>
+    <link rel="stylesheet" href="anketa.css">
+</head>
+<body>
+    <form id="anketa">
+        <h1>Anketa</h1>
+        <progress id="progress-bar" value="0" max="100"></progress>
+        
+        <fieldset> <!-- asmenine informacija -->
+            <legend>Asmeninė informacija</legend>
+
+            <label for="name">Vardas:</label>
+            <input type="text" id="name" name="name" placeholder="Įveskite vardą" required>
+
+            <label for="middle-name">Antrasis vardas:</label>
+            <input type="text" id="middle-name" name="middle-name" placeholder="Įveskite antrąjį vardą">
+            
+            <label for="surname">Pavardė:</label>
+            <input type="text" id="surname" name="surname" placeholder="Įveskite pavardę" required>
+            
+            <label for="gender">Lytis:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Pasirinkti</option>
+                <option value="male">Vyras</option>
+                <option value="female">Moteris</option>
+            </select>
+            
+            <label for="birthdate">Gimimo data:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            
+            <label for="personal-id">Asmens kodas:</label>
+            <input type="text" id="personal-id" name="personalId" placeholder="Įveskite asmens kodą" pattern="\d{11}" required>
+
+            <div id="dynamic-marital-status">
+                <!-- vedybine padetis -->
+            </div>
+
+
+        </fieldset>
+
+        
+
+        <fieldset id="education-section"> <!-- Išsilavinimas -->
+            <legend>Išsilavinimas</legend>
+            <label for="education-level">Jūsų išsilavinimas:</label>
+            <select id="education-level" name="educationLevel" required>
+                <option value="">Pasirinkite</option>
+                <option value="basic">Pagrindinis</option>
+                <option value="secondary">Vidurinis</option>
+                <option value="vocational">Profesinis</option>
+                <option value="college">Aukštasis-kolegijinis</option>
+                <option value="university">Aukštasis-universitetinis</option>
+            </select>
+            
+            <div id="education-details">
+                <!-- Išsilavinimas dinaminiai pasrinkimai -->
+            </div>
+        </fieldset>
+
+        <fieldset> <!-- Profesinė informacija -->
+            <legend>Profesinė informacija</legend>
+            <label for="occupation">Profesinė padėtis:</label>
+            <select id="occupation-details" name="occupationDetails" required>
+                <option value="">Pasirinkite</option>
+                <option value="studying">Studijuoja</option>
+                <option value="working">Dirba</option>
+                <option value="not-working">Nedirba</option>
+                <option value="maternity-paterniry-leave">Motinystės/tėvystės atostogos</option>
+            </select>
+
+            <div id="occupation-details-dinamic">
+                <!-- • Profesinė padėtis [studijuoja, dirba, nedirba, motinystės/tėvystės atostogose]: o [Studijų pakopa, kursas, įstaiga, tikėtini baigimo metai]; o [Darbo įstaiga, pareigos]; o [Nedarbo priežastis]; o [Atostogų pabaiga] -->
+            </div>
+
+            <label for="work-experiance">Darbo patirtis:</label>
+            <input type="text" id="name" name="name" placeholder="Įveskite darbo patirtį metais" required>
+
+            <label for="work-area">Darbo sritis:</label>
+            <select id="work-area" name="workArea" required>
+                <option value="">Pasirinkite</option>
+                <option value="law">Teisė</option>
+                <option value="">Viešasis sektorius</option>
+                <option value="healthcare">Sveikatos apsauga</option>
+                <option value="Industry/manufacturing">Pramonė / gamyba</option>
+                <option value="IT">IT</option>
+                <option value="commerce">Prekyba</option>
+                <option value="military">Krašto apsauga</option>
+                <option value="internal-affairs">Vidaus reikalų sistema</option>
+                <option value="customer-service">Klientų aptarnavimas ir paslaugos</option>
+                <option value="transportation">Transportas</option>
+                <option value="entertainment">Kultūra ir pramogos</option>
+                <option value="education">Švietimas / studijos</option>
+            </select>
+
+        </fieldset> 
+
+        <fieldset> <!-- Kontaktinė informacija -->
+            <legend>Kontaktinė informacija</legend>
+            <label for="phone">Telefono numeris:</label>
+            <input type="tel" id="phone" name="phone" placeholder="+370..." pattern="^\+370\d{8}$" required>
+            
+            <label for="email">El. pašto adresas:</label>
+            <input type="email" id="email" name="email" placeholder="Įveskite savo el. pašto adresą" required>
+
+            <label for="address">Gyvenamoji vieta:</label>
+            <input type="text" id="personal-id" name="personalId" placeholder="Įveskite gyvenamąją vietą" required>
+        </fieldset>
+        
+        <button type="submit">Pateikti</button>
+    </form>
+    <script src="anketa.js"></script>
+</body>
+</html>
