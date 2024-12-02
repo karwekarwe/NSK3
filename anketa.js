@@ -1,4 +1,3 @@
-// JavaScript for Dynamic Form
 const formData = {};
 const form = document.getElementById('anketa');
 const progressBar = document.getElementById('progress-bar');
@@ -25,26 +24,26 @@ document.getElementById('birthdate').addEventListener('change', function () {
         const month = (birthdate.getMonth() + 1).toString().padStart(2, '0');
         const day = birthdate.getDate().toString().padStart(2, '0');
 
-        // Determine the first digit based on century and gender
+        // pirmas skaitmuo pagal amziu ir lyti
         let genderCode = '';
-        if (century === 18) genderCode = gender === 'male' ? '1' : '2'; // XIX a.
-        else if (century === 19) genderCode = gender === 'male' ? '3' : '4'; // XX a.
-        else if (century === 20) genderCode = gender === 'male' ? '5' : '6'; // XXI a.
+        if (century === 18) genderCode = gender === 'male' ? '1' : '2'; 
+        else if (century === 19) genderCode = gender === 'male' ? '3' : '4'; 
+        else if (century === 20) genderCode = gender === 'male' ? '5' : '6'; 
 
-        // Generate the first part of the personal ID
+        // id generavimas
         const initialPersonalId = `${genderCode}${yearPart}${month}${day}`;
 
-        // Automatically fill the personal ID field with the first part
+        // id uzpildymas
         const personalIdField = document.getElementById('personal-id');
         personalIdField.value = initialPersonalId;
 
-        // Notify the user to complete the ID
+        // like skaiciai
         personalIdField.placeholder = 'Įveskite likusius 4 skaitmenis';
         personalIdField.focus();
     }
 });
 
-// Validation on form submit to ensure full ID is entered
+// ar pilnas id
 document.getElementById('anketa').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -56,8 +55,6 @@ document.getElementById('anketa').addEventListener('submit', function (e) {
         return;
     }
 
-    console.log('Pilnas asmens kodas:', personalId);
-    alert(`Pilnas asmens kodas: ${personalId}`);
 });
 
 
@@ -67,30 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const dynamicMaritalStatus = document.getElementById('dynamic-marital-status');
 
     document.getElementById('birthdate').addEventListener('change', function () {
-        dynamicMaritalStatus.innerHTML = ''; // Clear previous dynamic fields
+        dynamicMaritalStatus.innerHTML = ''; 
 
-        // Get the value of the birthdate input
         const birthdateValue = this.value;
-        if (!birthdateValue) return; // Exit if no date is selected
+        if (!birthdateValue) return; 
 
-        // Calculate the user's age
         const birthdate = new Date(birthdateValue);
         const today = new Date();
-
-        // Check if the birthdate is in the future
-        if (birthdate > today) {
-            dynamicMaritalStatus.innerHTML = `
-                <p>Prašome įvesti teisingą gimimo datą (negali būti ateities data).</p>
-            `;
-            return;
-        }
-
         let age = today.getFullYear() - birthdate.getFullYear();
         const isBeforeBirthday = today.getMonth() < birthdate.getMonth() ||
             (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate());
         if (isBeforeBirthday) age--;
 
-        // Dynamic content based on the calculated age
         if (age > 16) {
             dynamicMaritalStatus.innerHTML = `
                 <label for="marital-status">Vedybinė padėtis:</label>
@@ -100,25 +85,40 @@ document.addEventListener("DOMContentLoaded", () => {
                     <option value="married">Vedęs/Ištekėjusi</option>
                     <option value="divorced">Išsiskyręs(-usi)</option>
                 </select>
-
-                <label for="spouse">Sutuoktinis(-ė):</label>
-                <input type="text" id="spouse" name="Spouse" placeholder="Įveskite sutuoktinio vardą ir pavardę" required>
+                <div id="spouse-container" style="display: none;">
+                    <label for="spouse">Sutuoktinis(-ė):</label>
+                    <input type="text" id="spouse" name="Spouse" placeholder="Įveskite sutuoktinio vardą ir pavardę">
+                </div>
             `;
-        } 
+
+            const maritalStatusSelect = document.getElementById('marital-status');
+            const spouseContainer = document.getElementById('spouse-container');
+
+            maritalStatusSelect.addEventListener('change', function () {
+                if (this.value === 'married') {
+                    spouseContainer.style.display = 'block';
+                    document.getElementById('spouse').setAttribute('required', true);
+                } else {
+                    spouseContainer.style.display = 'none';
+                    document.getElementById('spouse').removeAttribute('required');
+                }
+            });
+        }
     });
 });
 
-// dinamine nuo isilavinimo
+
+// dinamine isilavinimo
 
 const educationDetails = document.getElementById('education-details');
 const educationLevel = document.getElementById('education-level');
 
 educationLevel.addEventListener('change', function () {
-    educationDetails.innerHTML = ''; // Clear previous fields
+    educationDetails.innerHTML = ''; 
     const selectedLevel = this.value;
 
     if (selectedLevel !== '') {
-        // Common fields for all education levels
+        // visiems
         educationDetails.innerHTML = `
             <label for="institution">Paskutinė baigta mokslo / studijų įstaiga:</label>
             <input type="text" id="institution" name="institution" placeholder="Įveskite įstaigos pavadinimą" required>
@@ -127,7 +127,7 @@ educationLevel.addEventListener('change', function () {
             <input type="number" id="graduation-year" name="graduationYear" placeholder="Įveskite baigimo metus" required>
         `;
         
-        // Add specific fields based on education level
+        // specifiniai
         if (selectedLevel === 'college' || selectedLevel === 'university') {
             educationDetails.innerHTML += `
                 <label for="qualification">Kvalifikacija:</label>
@@ -155,10 +155,8 @@ document.getElementById('occupation-details').addEventListener('change', functio
     const occupation = this.value;
     const dynamicFields = document.getElementById('occupation-details-dinamic');
 
-    // Clear previous fields
     dynamicFields.innerHTML = '';
 
-    // Add dynamic fields based on the selected occupation
     if (occupation === 'studying') {
         dynamicFields.innerHTML = `
             <label for="study-level">Studijų pakopa:</label>
@@ -196,7 +194,7 @@ document.getElementById('occupation-details').addEventListener('change', functio
 
 
 
-// Validate and collect form data
+// sekmingai pateikta
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const elements = form.elements;
@@ -206,7 +204,7 @@ form.addEventListener('submit', (e) => {
         }
     }
     console.log('Form Data:', formData);
-    alert('Form submitted successfully!');
+    alert('Anketa sėkmingai pateikta!');
 });
 
 // Update progress on input change
